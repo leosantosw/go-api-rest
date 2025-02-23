@@ -1,11 +1,16 @@
 package routers
 
 import (
+	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/leosantosw/go-api-rest/controllers"
 )
 
 func Routers() {
-	http.HandleFunc("/users", controllers.Users)
+	r := mux.NewRouter()
+	r.HandleFunc("/users", controllers.ListUsers)
+	r.HandleFunc("/users/{id}", controllers.FindUser)
+	log.Fatal(http.ListenAndServe(":8080", r))
 }
