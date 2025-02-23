@@ -3,10 +3,13 @@ package main
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/leosantosw/go-api-rest/database"
+	"github.com/leosantosw/go-api-rest/routers"
 )
 
 func HandleRequests() {
-	http.HandleFunc("/", Home)
+	routers.Routers()
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -15,6 +18,6 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Println("Hello, World!")
+	database.Connect()
 	HandleRequests()
 }
