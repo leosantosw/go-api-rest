@@ -14,3 +14,9 @@ func ListUsers() []User {
 	database.DB.Find(&users)
 	return users
 }
+
+func FindUser(id string) User {
+	user := User{}
+	database.DB.First(&user, id)
+	return user
+}
