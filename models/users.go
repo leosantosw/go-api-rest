@@ -1,12 +1,16 @@
 package models
 
-import "github.com/leosantosw/go-api-rest/database"
+import (
+	"github.com/google/uuid"
+	"github.com/leosantosw/go-api-rest/database"
+)
 
 type User struct {
-	Id        int    `json:"id"`
-	Name      string `json:"name"`
-	Password  int    `json:"password"`
-	CreatedAt string `json:"created_at"`
+	Id        uuid.UUID `json:"id"`
+	Name      string    `json:"name"`
+	Email     string    `json:"email"`
+	Password  string    `json:"password"`
+	CreatedAt string    `json:"created_at"`
 }
 
 func ListUsers() []User {
@@ -19,4 +23,8 @@ func FindUser(id string) User {
 	user := User{}
 	database.DB.First(&user, id)
 	return user
+}
+
+func CreateUser(user User) {
+	database.DB.Create(&user)
 }

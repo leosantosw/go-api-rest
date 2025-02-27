@@ -10,7 +10,8 @@ import (
 
 func Routers() {
 	r := mux.NewRouter()
-	r.HandleFunc("/users", controllers.ListUsers)
-	r.HandleFunc("/users/{id}", controllers.FindUser)
+	r.HandleFunc("/users", controllers.CreateUser).Methods("POST")
+	r.HandleFunc("/users", controllers.ListUsers).Methods("GET")
+	r.HandleFunc("/users/{id}", controllers.FindUser).Methods("GET")
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
