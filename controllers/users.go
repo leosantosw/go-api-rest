@@ -34,3 +34,10 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	id := vars["id"]
 	models.DeleteUser(id)
 }
+
+func EditUser(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	userUpdated := models.EditUser(id, r.Body)
+	json.NewEncoder(w).Encode(userUpdated)
+}

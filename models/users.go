@@ -1,6 +1,9 @@
 package models
 
 import (
+	"encoding/json"
+	"io"
+
 	"github.com/google/uuid"
 	"github.com/leosantosw/go-api-rest/database"
 )
@@ -32,4 +35,12 @@ func CreateUser(user User) {
 func DeleteUser(id string) {
 	user := User{}
 	database.DB.Delete(&user, &id)
+}
+
+func EditUser(id string, body io.Reader) User {
+	user := User{}
+	database.DB.First(&user, id)
+	json.NewDecoder(body).Decode(&user)
+	database.DB.Save(&user)
+	return user
 }
