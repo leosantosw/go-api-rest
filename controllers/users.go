@@ -28,3 +28,9 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	models.CreateUser(user)
 	json.NewEncoder(w).Encode(user)
 }
+
+func DeleteUser(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	models.DeleteUser(id)
+}

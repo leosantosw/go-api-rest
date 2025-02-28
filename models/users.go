@@ -28,3 +28,8 @@ func FindUser(id string) User {
 func CreateUser(user User) {
 	database.DB.Create(&user)
 }
+
+func DeleteUser(id string) {
+	user := User{}
+	database.DB.Delete(&user, &id)
+}
